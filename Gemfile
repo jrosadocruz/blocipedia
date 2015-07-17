@@ -6,6 +6,7 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 
 gem 'foundation-rails'
+gem 'foundation_rails_helper'
 gem 'haml-rails'
 gem 'sass-rails'
 gem 'coffee-rails', '~> 4.1.0'
