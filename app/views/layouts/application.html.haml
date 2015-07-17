@@ -1,0 +1,43 @@
+!!! 5
+%html{ :lang => "en"}
+  %head
+    %meta{ :charset => "utf-8" }
+    %meta{ :name => "viewport", :content => "width=device-width, initial-scale=1.0" }
+    %title= content_for?(:title) ? yield(:title) : "Blocipedia"
+    = stylesheet_link_tag "application"
+    = javascript_include_tag "vendor/modernizr"
+    = javascript_include_tag "application", 'data-turbolinks-track' => true
+    = csrf_meta_tag
+
+  %body
+    .contain-to-grid
+      %nav.top-bar{"data-topbar" => "", :role => "navigation"}
+        %ul.title-area
+          %li.name
+            %h1
+              =link_to 'Blocipedia', root_path
+          %li.toggle-topbar.menu-icon
+            %a{:href => "javascript:void(0)"}
+              %span Menu
+        %section.top-bar-section
+          %ul.right
+            - if user_signed_in?
+              %li.has-dropdown
+                %a{:href => "javascript:void(0)"} Profile
+                %ul.dropdown
+                  =nav_link 'Edit profile', edit_user_registration_path
+                  %li
+                    =link_to 'Logout', destroy_user_session_path, :method => :delete
+            - else
+              =nav_link 'Sign up', new_user_registration_path
+              =nav_link 'Login', new_user_session_path
+          / Left Nav Section
+          %ul.left
+            =nav_link 'Home', root_path
+
+    - flash.each do |name, msg|
+      %div{:class => "alert-box #{name.to_s == 'notice' ? 'success' : 'alert'}", "data-alert" => ""}
+        = content_tag :div, msg
+        %a.close{:href => "#"} &times;
+    = yield
+

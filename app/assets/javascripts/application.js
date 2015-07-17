@@ -12,5 +12,12 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
+//= require foundation
 //= require_tree .
+
+$(function(){ $(document).foundation(); });
+// $(function(){
+//   $(document).on('close.fndtn.alert', function(event) {
+//     console.info('An alert box has been closed!');
+//   });
+// })

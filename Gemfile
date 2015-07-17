@@ -5,10 +5,14 @@ gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 
-gem 'bootstrap-sass'
+gem 'foundation-rails'
+gem 'haml-rails'
+gem 'sass-rails'
+gem 'coffee-rails', '~> 4.1.0'
+gem 'uglifier', '>= 1.3.0'
+
 gem 'devise'
 gem 'pundit'
-
 gem 'figaro', '1.0'
 
 group :production do
@@ -40,9 +44,6 @@ end
 
 # Gems used only for assets and not required
 # in production environments by default.
-group :assets do
-  gem 'haml-rails'
-  gem 'sass-rails'
-  gem 'coffee-rails', '~> 4.1.0'
-  gem 'uglifier', '>= 1.3.0'
-end
+# group :assets do
+
+# end
