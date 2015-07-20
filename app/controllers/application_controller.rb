@@ -6,10 +6,10 @@ class ApplicationController < ActionController::Base
 
   protected
 
+  # http://www.peoplecancode.com/tutorials/adding-custom-fields-to-devise
   def configure_permitted_parameters
-    devise_parameter_sanitizer.for(:sign_up) << :username
-    devise_parameter_sanitizer.for(:sign_up) << :name
-    devise_parameter_sanitizer.for(:sign_up) << :lastname
+    devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:name, :lastname, :username, :email, :password) }
+    # devise_parameter_sanitizer.for(:account_update) { |u| u.permit(:name, :lastname, :username, :email, :password, :current_password) }
   end
 
 end

@@ -5,12 +5,9 @@
 .row
   .large-12.columns
     = form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f|
-      = devise_error_messages!
       .row
         .small-12.medium-6.medium-centered.columns
-          = f.label :email do
-            Email
-            = f.email_field :email, autofocus: true, value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email)
+          = f.email_field :email, autofocus: true, value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email)
           .actions
             = f.submit "Resend confirmation instructions", class:'button small'
           = render "users/shared/links"

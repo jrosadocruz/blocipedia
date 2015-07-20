@@ -23,7 +23,8 @@
           %ul.right
             - if user_signed_in?
               %li.has-dropdown
-                %a{:href => "javascript:void(0)"} Profile
+                %a{:href => "javascript:void(0)"}
+                  = current_user.name
                 %ul.dropdown
                   =nav_link 'Edit profile', edit_user_registration_path
                   %li
@@ -40,4 +41,6 @@
         = content_tag :div, msg
         %a.close{:href => "#"} &times;
     = yield
+
+    =debug(params) if Rails.env.development?
 
