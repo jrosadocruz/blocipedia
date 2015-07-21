@@ -9,4 +9,10 @@ class User < ActiveRecord::Base
   validates :lastname , presence: true
   validates :username , presence: true, length: { minimum: 5 }
 
+  has_many :wikis
+
+  def full_name
+    name + ' ' + lastname
+  end
+
 end

@@ -1,0 +1,24 @@
+.row
+  .small-12.columns
+    %h1.dib Listing wikis
+    = link_to 'New Wiki', new_wiki_path, class:'button  small  right  mts'
+
+    %table
+      %thead
+        %tr
+          %th Title
+          %th Body
+          %th Private
+          %th User
+          %th{colspan:2} Actions
+
+      %tbody
+        - @wikis.each do |wiki|
+          %tr
+            %td= link_to wiki.title, wiki
+            %td= wiki.body
+            %td= wiki.private
+            %td= wiki.user.full_name
+            %td= link_to 'Edit', edit_wiki_path(wiki)
+            %td= link_to 'Delete', wiki, :method => :delete, :data => { :confirm => 'Are you sure?' }
+

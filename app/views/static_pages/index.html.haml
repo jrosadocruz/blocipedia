@@ -1,3 +1,10 @@
 .row
   .large-12.columns
     %h1 Welcome
+
+.row
+  .large-12.columns
+    - Wiki.all.each do |w|
+      %ul
+        %li
+          = link_to w.title, w

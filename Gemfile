@@ -3,6 +3,7 @@ ruby '2.2.0'
 gem 'rails', '4.2.1'
 gem 'jquery-rails'
 gem 'turbolinks'
+gem 'jquery-turbolinks'
 gem 'jbuilder', '~> 2.0'
 
 gem 'foundation-rails'

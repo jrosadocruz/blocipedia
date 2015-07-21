@@ -1,0 +1,16 @@
+.row
+  .small-12.columns
+    %h1.dib= @wiki.title
+.row
+  .small-12.columns
+    = link_to 'Edit', edit_wiki_path(@wiki), class:'button  small'
+    = link_to 'Back', root_path, class:'button  small  secondary'
+.row
+  .small-12.columns
+    %p
+      By:
+      = @wiki.user.full_name
+      | Private:
+      = @wiki.private
+    %p= @wiki.body
+
