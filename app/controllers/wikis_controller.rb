@@ -5,6 +5,7 @@ class WikisController < ApplicationController
   # GET /wikis.json
   def index
     @wikis = Wiki.visible_to(current_user)
+    # @wikis = Wiki.all
     authorize @wikis
   end
 
@@ -22,6 +23,7 @@ class WikisController < ApplicationController
 
   # GET /wikis/1/edit
   def edit
+    authorize @wiki
   end
 
   # POST /wikis

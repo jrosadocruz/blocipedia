@@ -11,6 +11,12 @@ class User < ActiveRecord::Base
 
   has_many :wikis
 
+  after_initialize :init
+
+  def init
+    self.role  ||= 'standard'
+  end
+
   def full_name
     name + ' ' + lastname
   end
