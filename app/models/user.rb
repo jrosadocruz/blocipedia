@@ -15,4 +15,16 @@ class User < ActiveRecord::Base
     name + ' ' + lastname
   end
 
+  def admin?
+    role == 'admin'
+  end
+
+  def standard?
+    role == 'standard'
+  end
+
+  def premium?
+    role == 'premium'
+  end
+
 end
