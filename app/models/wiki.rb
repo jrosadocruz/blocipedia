@@ -3,8 +3,9 @@ class Wiki < ActiveRecord::Base
   validates :user, presence:true
   after_initialize :init
 
-  scope :visible_to, -> (user) { user ? all : where(private: false) }
-  # scope :visible_to, -> (user) { user ? all : where(["private = ? or user_id = ?", false, current_user.id ]) }
+  # scope :visible_to, -> (user) { user ? all : where(private: false) }
+  scope :visible_to, -> (user) { where(["private = ? or user_id =?", false, user.id ]) }
+  # scope :visible_to, -> (user) { user ? all : where(["private = ?", false ]) }
   # scope :visible_to, -> (user) { user ? all : where(["private = ?", false ]) }
   # scope :visible_to, -> (user) { where(["private = ? or user_id = ?", false, user.id ]) }
   # scope :visible_to, -> (user) { user ? all : where(private: true) }

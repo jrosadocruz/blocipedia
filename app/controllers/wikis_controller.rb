@@ -4,8 +4,11 @@ class WikisController < ApplicationController
   # GET /wikis
   # GET /wikis.json
   def index
-    @wikis = Wiki.visible_to(current_user)
-    # @wikis = Wiki.all
+    if user_signed_in?
+      @wikis = Wiki.visible_to(current_user)
+    else
+      @wikis = Wiki.where(private: false)
+    end
     authorize @wikis
   end
 
