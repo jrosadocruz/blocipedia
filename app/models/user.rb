@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
 
   has_many :wikis
 
-  after_initialize :init
+  after_initialize :init, if: :new_record?
 
   def init
     self.role  ||= 'standard'
