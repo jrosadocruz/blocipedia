@@ -1,28 +1,52 @@
 require 'faker'
 
-2.times do
-  user = User.new(
-    name:     Faker::Name.first_name,
-    lastname: Faker::Name.last_name,
-    email:    Faker::Internet.email,
-    password: Faker::Lorem.characters(10)
-  )
-  user.username = "#{user.name}#{user.lastname}".downcase
-  user.skip_confirmation!
-  user.save!
-end
+# 2.times do
+#   user = User.new(
+#     name:     Faker::Name.first_name,
+#     lastname: Faker::Name.last_name,
+#     email:    Faker::Internet.email,
+#     password: Faker::Lorem.characters(10)
+#   )
+#   user.username = "#{user.name}#{user.lastname}".downcase
+#   user.skip_confirmation!
+#   user.save!
+# end
 
 admin = User.new(
-  name:     'Jose',
-  lastname: 'Rosado',
-  email:    'jose@rosa.do',
-  username: 'joserosado',
+  name:     'Admin',
+  lastname: 'Member',
+  email:    'admin@rosa.do',
+  username: 'admin',
   password: 'holamundo',
   role:     'admin'
 )
 
 admin.skip_confirmation!
 admin.save!
+
+standard = User.new(
+  name:     'Standard',
+  lastname: 'Member',
+  email:    'standard@rosa.do',
+  username: 'standard',
+  password: 'holamundo',
+  role:     'standard'
+)
+
+standard.skip_confirmation!
+standard.save!
+
+premium = User.new(
+  name:     'Premium',
+  lastname: 'Member',
+  email:    'premium@rosa.do',
+  username: 'premium',
+  password: 'holamundo',
+  role:     'premium'
+)
+
+premium.skip_confirmation!
+premium.save!
 
 users = User.all
 
