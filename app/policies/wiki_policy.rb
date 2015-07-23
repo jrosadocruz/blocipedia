@@ -5,11 +5,15 @@ class WikiPolicy < ApplicationPolicy
   end
 
   def show?
-    user.present? && (record.user == user || user.admin?)
+    user.present?
   end
 
   def update?
-    user.present? && (!record.private? || record.user == user || user.admin?)
+    user.present? && (record.user == user || user.admin? || !record.private?)
+  end
+
+  def edit?
+    update?
   end
 
 end

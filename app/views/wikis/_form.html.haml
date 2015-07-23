@@ -1,7 +1,9 @@
 = form_for @wiki do |f|
   = f.text_field :title
   = f.text_area :body
-  - if current_user.admin? || current_user.premium?
+  - if @wiki.user == current_user && current_user.premium?
+    = f.check_box :private
+  - if current_user.admin?
     = f.check_box :private
   .actions
     = f.submit 'Save changes', class: 'button small'
