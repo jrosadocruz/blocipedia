@@ -22,6 +22,7 @@ class WikisController < ApplicationController
   # GET /wikis/new
   def new
     @wiki = Wiki.new
+    @wiki.user = current_user
     authorize @wiki
   end
 
@@ -80,14 +81,15 @@ class WikisController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def wiki_params
-      if !user_signed_in?
-        params.require(:wiki).permit()
-      else
-        if current_user.premium? || current_user.admin?
-          params.require(:wiki).permit(:title, :body, :private, :user_id)
-        else
-          params.require(:wiki).permit(:title, :body, :user_id)
-        end
-      end
+      params.require(:wiki).permit(:title, :body, :private, :user_id)
+      # if !user_signed_in?
+      #   params.require(:wiki).permit()
+      # else
+      #   if current_user.premium? || current_user.admin?
+      #     params.require(:wiki).permit(:title, :body, :private, :user_id)
+      #   else
+      #     params.require(:wiki).permit(:title, :body, :user_id)
+      #   end
+      # end
     end
 end
