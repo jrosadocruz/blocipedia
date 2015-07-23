@@ -5,7 +5,8 @@ class WikisController < ApplicationController
   # GET /wikis.json
   def index
     if user_signed_in?
-      @wikis = Wiki.visible_to(current_user)
+      # @wikis = Wiki.visible_to(current_user)
+      @wikis = Wiki.all
     else
       @wikis = Wiki.where(private: false)
     end
@@ -79,6 +80,14 @@ class WikisController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def wiki_params
-      params.require(:wiki).permit(:title, :body, :private, :user_id)
+      if !user_signed_in?
+        params.require(:wiki).permit()
+      else
+        if current_user.premium? || current_user.admin?
+          params.require(:wiki).permit(:title, :body, :private, :user_id)
+        else
+          params.require(:wiki).permit(:title, :body, :user_id)
+        end
+      end
     end
 end
