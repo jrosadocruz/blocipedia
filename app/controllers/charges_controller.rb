@@ -3,17 +3,13 @@ class ChargesController < ApplicationController
   def create
     @amount = params[:amount]
 
-    customer = Stripe::Customer.create(
-      email: current_user.email,
-      card: params[:stripeToken]
-    )
+    customer = Stripe::Customer.create email: current_user.email,
+                                       card: params[:stripeToken]
 
-    charge = Stripe::Charge.create(
-      customer: customer.id,
-      amount: @amount,
-      description: "Blocipedia Membership - #{current_user.email}",
-      currency: 'usd'
-    )
+    Stripe::Charge.create customer: customer.id,
+                                    amount: @amount,
+                                    description: "Blocipedia Membership - #{current_user.email}",
+                                    currency: 'usd'
 
     if current_user.update(role: 'premium')
       flash[:success] = "Thanks for all the money, #{current_user.email}!"

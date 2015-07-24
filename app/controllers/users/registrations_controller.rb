@@ -19,9 +19,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
       class: 'stripe-button',
       id: 'pay-with-card',
       data: {
-        key: "#{ Rails.configuration.stripe[:publishable_key] }",
+        amount: 15_00,
         description: "Premium Membership - #{current_user.email}",
-      amount: 15_00
+        key: "#{ Rails.configuration.stripe[:publishable_key] }"
       }
     }
     super
