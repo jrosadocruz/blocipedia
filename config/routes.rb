@@ -3,7 +3,9 @@ Rails.application.routes.draw do
   resources :charges, only: [:new, :create]
 
   resources :wikis
+  get '/my-wikis', to: 'wikis#all'
   root 'wikis#index'
+  delete '/downgrade', to: 'charges#downgrade'
 
   devise_for :users, controllers: { registrations: "users/registrations" }
   # The priority is based upon order of creation: first created -> highest priority.

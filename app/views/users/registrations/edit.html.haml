@@ -7,6 +7,7 @@
   .small-12.medium-6.medium-centered.columns
     = if current_user.premium?
       %h3 Downgrade my account
+      =button_to 'Downgrade account', downgrade_path, method: :delete, class: 'button'
     = if !current_user.premium?
       = form_tag charges_path do
         %h3 Upgrade my account

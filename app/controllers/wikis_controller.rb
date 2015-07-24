@@ -13,6 +13,12 @@ class WikisController < ApplicationController
     authorize @wikis
   end
 
+  def all
+    if user_signed_in?
+      @wikis = current_user.wikis.all
+    end
+  end
+
   # GET /wikis/1
   # GET /wikis/1.json
   def show

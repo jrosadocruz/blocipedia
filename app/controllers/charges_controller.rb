@@ -3,13 +3,20 @@ class ChargesController < ApplicationController
   def create
     @amount = params[:amount]
 
-    customer = Stripe::Customer.create email: current_user.email,
-                                       card: params[:stripeToken]
+    if current_user.customer_id.nil?
+      customer = Stripe::Customer.create(
+        email: current_user.email,
+        card: params[:stripeToken]
+      )
+      current_user.customer_id = customer.id
+    end
 
-    Stripe::Charge.create customer: customer.id,
-                                    amount: @amount,
-                                    description: "Blocipedia Membership - #{current_user.email}",
-                                    currency: 'usd'
+    Stripe::Charge.create(
+      customer: customer.id,
+      amount: @amount,
+      description: "Blocipedia Membership - #{current_user.email}",
+      currency: 'usd'
+    )
 
     if current_user.update(role: 'premium')
       flash[:success] = "Thanks for all the money, #{current_user.email}!"
@@ -25,17 +32,12 @@ class ChargesController < ApplicationController
 
   end
 
+  def downgrade
+    # customer = Stripe::Customer.retrieve(current_user.customer_id)
+    # customer.delete
+    current_user.update_attributes(role: 'standard', customer_id: nil)
+    current_user.make_wikis_public
+    redirect_to edit_user_registration_path
+  end
 
-  # def new
-  #   @stripe_btn_hash = {
-  #     src: "https://checkout.stripe.com/checkout.js",
-  #     class: 'stripe-button',
-  #     id: 'pay-with-card',
-  #     data: {
-  #       key: "#{ Rails.configuration.stripe[:publishable_key] }",
-  #       description: "Premium Membership - #{current_user.email}",
-  #     amount: 15_00
-  #     }
-  #   }
-  # end
 end

@@ -1,0 +1,26 @@
+.row
+  .small-12.columns
+    %h1.dib Listing my Wikis
+    - if policy(Wiki.new).create?
+      = link_to 'New Wiki', new_wiki_path, class:'button  small  right  mts'
+
+    %table{style: "width: 100%;"}
+      %thead
+        %tr
+          %th{width: 300} Title
+          %th Body
+          %th Private
+          %th{width: 100} User
+          - if policy(Wiki.new).create?
+            %th{colspan:2} Actions
+
+      %tbody
+        - @wikis.each do |wiki|
+          %tr
+            %td= link_to wiki.title, wiki
+            %td= wiki.body
+            %td= wiki.private
+            %td= wiki.user.name
+            - if policy(Wiki.new).create?
+              %td= link_to 'Edit', edit_wiki_path(wiki)
+              %td= link_to 'Delete', wiki, :method => :delete, :data => { :confirm => 'Are you sure?' }

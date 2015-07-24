@@ -17,6 +17,14 @@ class User < ActiveRecord::Base
     self.role  ||= 'standard'
   end
 
+  def make_wikis_public
+    wikis.each do |w|
+      if w.private == true
+        w.update_attributes(private: false)
+      end
+    end
+  end
+
   def full_name
     name + ' ' + lastname
   end

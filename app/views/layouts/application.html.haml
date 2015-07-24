@@ -35,6 +35,8 @@
           / Left Nav Section
           %ul.left
             =nav_link 'Home', root_path
+            - if user_signed_in?
+              =nav_link 'My Wikis', my_wikis_path
 
     - flash.each do |name, msg|
       %div{:class => "alert-box #{name.to_s == 'notice' ? 'success' : 'alert'}", "data-alert" => ""}
