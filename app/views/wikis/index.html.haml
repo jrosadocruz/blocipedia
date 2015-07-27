@@ -18,7 +18,7 @@
         - @wikis.each do |wiki|
           %tr
             %td= link_to wiki.title, wiki
-            %td= wiki.body
+            %td= truncate(wiki.body, length: 100)
             %td= wiki.private
             %td= wiki.user.name
             - if policy(Wiki.new).create?

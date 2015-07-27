@@ -12,5 +12,5 @@
       = @wiki.user.full_name
       | Private:
       = @wiki.private
-    %p= @wiki.body
+    %p= markdown_to_html @wiki.body
 
