@@ -1,5 +1,9 @@
 class Wiki < ActiveRecord::Base
   belongs_to :user
+
+  has_many :collaborations
+  has_many :collaborators, through: :collaborations, source: :user
+
   validates :user, presence:true
   after_initialize :init
 
@@ -16,5 +20,9 @@ class Wiki < ActiveRecord::Base
   def init
     self.private == false if (self.has_attribute? :private) && self.private.nil?
   end
+
+  # def collaborator_ids
+
+  # end
 
 end

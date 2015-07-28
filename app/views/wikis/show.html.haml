@@ -14,3 +14,7 @@
       = @wiki.private
     %p= markdown_to_html @wiki.body
 
+.row
+  .small-12.columns
+    =@wiki.collaborators.each do |c|
+      =c.full_name

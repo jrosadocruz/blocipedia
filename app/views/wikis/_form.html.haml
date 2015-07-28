@@ -5,5 +5,9 @@
     = f.check_box :private
   - if current_user.admin?
     = f.check_box :private
+
+  %h3 Collaborators
+  = f.collection_check_boxes(:collaborator_ids, User.all, :id, :full_name)
+
   .actions
     = f.submit 'Save changes', class: 'button small'

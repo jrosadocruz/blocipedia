@@ -9,7 +9,10 @@ class User < ActiveRecord::Base
   validates :lastname , presence: true
   validates :username , presence: true, length: { minimum: 5 }
 
-  has_many :wikis
+  # has_many :wikis
+
+  has_many :collaborations
+  has_many :wikis, :through => :collaborations
 
   after_initialize :init, if: :new_record?
 
